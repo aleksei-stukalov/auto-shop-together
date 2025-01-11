@@ -7,8 +7,8 @@ import { Garage } from '@game/scenes/Garage'
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.WEBGL,
   scale: {
-    width: 800,
-    height: 600,
+    width: window.innerWidth,
+    height: window.innerHeight,
     mode: Phaser.Scale.ENVELOP,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
