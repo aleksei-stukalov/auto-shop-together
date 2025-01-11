@@ -1,7 +1,7 @@
 interface IProps {
-  ref: React.RefObject<HTMLCanvasElement | null>
+  canvas: React.RefObject<HTMLCanvasElement | null>
 }
 
-export default function GameCanvas({ ref }: IProps) {
-  return <canvas ref={ref} id="game" />
+export default function GameCanvas({ canvas }: IProps) {
+  return <canvas ref={canvas} id="game" />
 }
