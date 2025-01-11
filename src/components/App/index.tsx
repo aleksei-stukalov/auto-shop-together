@@ -1,14 +1,16 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { EventBus, StartGame } from '@game/Main'
-import Phaser from 'phaser'
 import MainMenu from '@components/MainMenu'
 import GameCanvas from '@components/GameCanvas'
+import { GameState } from '@enums'
+import { GameScene } from '@interfaces'
 // import styles from './style.module.css'
 
 export default function App() {
-  const [scene, setScene] = useState<Phaser.Scene | null>(null)
-  const canvas = useRef<HTMLCanvasElement>(null)
+  const [state, setState] = useState<GameState>(GameState.LOADING)
   const game = useRef<Phaser.Game | null>(null)
+  const scene = useRef<GameScene | null>(null)
+  const canvas = useRef<HTMLCanvasElement>(null)
 
   useLayoutEffect(() => {
     // Lets prevent context menu when right clicking in the game
@@ -23,25 +25,24 @@ export default function App() {
     // lifecycle, and we talk between the two using the events system.
     if (canvas.current !== null) game.current = StartGame(canvas.current)
 
+    // Game Engine will emit an event when the scene is ready, we need to react
+    // to that event and update the state of the game, show menus, etc.
+    EventBus.on('scene:ready', (newState: GameState, newScene: GameScene) => {
+      setState(newState)
+      scene.current = newScene
+    })
+
     return () => {
       window.removeEventListener('contextmenu', handleContextMenu)
       window.removeEventListener('click', handleFocus)
+      EventBus.off('scene:ready')
     }
   }, [])
 
-  useEffect(() => {
-    // When the scene is ready, we can start interacting with it
-    EventBus.on('scene:ready', (scene: Phaser.Scene) => setScene(scene))
-
-    return () => {
-      EventBus.off('scene:ready')
-    }
-  }, [scene])
-
   return (
     <>
-      <GameCanvas ref={canvas} />
-      <MainMenu />
+      <GameCanvas canvas={canvas} />
+      <MainMenu scene={scene.current} active={state === GameState.MAIN_MENU} />
     </>
   )
 }
