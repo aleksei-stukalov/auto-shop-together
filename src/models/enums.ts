@@ -1,0 +1,9 @@
+export enum GameState {
+  LOADING,
+  MAIN_MENU,
+  START_MENU,
+  LOAD_MENU,
+  OPTIONS_MENU,
+  IN_GAME,
+  PAUSE_MENU,
+}

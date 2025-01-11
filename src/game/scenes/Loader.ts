@@ -7,6 +7,6 @@ export class Loader extends Scene {
 
   create() {
     this.add.text(20, 20, 'Loader')
-    setTimeout(() => this.scene.start('Menu'), 1000)
+    this.scene.start('MainMenu')
   }
 }
