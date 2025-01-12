@@ -1,10 +1,9 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { EventBus, StartGame } from '@game/Main'
-import MainMenu from '@components/MainMenu'
-import GameCanvas from '@components/GameCanvas'
+import Menu from '@layers/Menu'
+import Canvas from '@layers/Canvas'
 import { GameState } from '@enums'
 import { GameScene } from '@interfaces'
-// import styles from './style.module.css'
 
 export default function App() {
   const [state, setState] = useState<GameState>(GameState.LOADING)
@@ -27,8 +26,8 @@ export default function App() {
 
     // Game Engine will emit an event when the scene is ready, we need to react
     // to that event and update the state of the game, show menus, etc.
-    EventBus.on('scene:ready', (newState: GameState, newScene: GameScene) => {
-      setState(newState)
+    EventBus.on('scene:ready', (newScene: GameScene) => {
+      setState(newScene.state)
       scene.current = newScene
     })
 
@@ -41,8 +40,8 @@ export default function App() {
 
   return (
     <>
-      <GameCanvas canvas={canvas} />
-      <MainMenu scene={scene.current} active={state === GameState.MAIN_MENU} />
+      <Canvas canvas={canvas} />
+      <Menu scene={scene.current} state={state} />
     </>
   )
 }
