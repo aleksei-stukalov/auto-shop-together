@@ -1,15 +1,16 @@
-import { Show } from '@utils/shower'
 import { GameScene } from '@interfaces'
+import { GameState } from '@enums'
+import { Show } from '@utils/shower'
 import styles from './style.module.css'
 
 interface IProps {
   scene: GameScene | null
-  active: boolean
+  state: GameState
 }
 
-export default function MainMenu({ scene, active }: IProps) {
+export default function MainMenu({ scene, state }: IProps) {
   return (
-    <Show when={active}>
+    <Show when={state === GameState.MAIN_MENU}>
       <div className={styles.container}>
         <button onClick={() => scene!.startGame()}>New Shop</button>
         <button>Load Shop</button>

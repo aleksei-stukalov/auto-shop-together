@@ -2,7 +2,7 @@ import { Scene } from 'phaser'
 
 export class Garage extends Scene {
   constructor() {
-    super('Garage')
+    super('Garage Scene')
   }
 
   create() {
