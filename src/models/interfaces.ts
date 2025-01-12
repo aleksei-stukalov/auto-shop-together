@@ -1,4 +1,6 @@
+import { GameState } from "@enums"
+
 export interface GameScene extends Phaser.Scene {
-  name: string
+  state: GameState
   startGame: () => void
 }
