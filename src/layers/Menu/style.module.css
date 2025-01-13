@@ -7,4 +7,12 @@
   & > * {
     padding: 1rem;
   }
+
+  h1 {
+    color: white;
+  }
+
+  input {
+    color: black;
+  }
 }

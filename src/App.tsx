@@ -41,7 +41,7 @@ export default function App() {
   return (
     <>
       <Canvas canvas={canvas} />
-      <Menu scene={scene.current} state={state} />
+      <Menu scene={scene.current} state={state} setState={setState} />
     </>
   )
 }
