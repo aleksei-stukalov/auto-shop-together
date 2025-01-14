@@ -9,10 +9,16 @@ export default function NewShop() {
   const setState = context?.setState
 
   const handleChange = (event: React.FormEvent<HTMLFormElement>) => {
+    // TODO: logic to prevent invalid symbols insertion
+    // TODO: logic to prevent invalid length
     console.log(event)
   }
-  const handleAction = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
+    // TODO: logic to check the validity of the shop name and owner name
+    // TODO: logic to store the shop name and owner name in the phaser game
+    // TODO: logic to start the next scene
     console.log(event)
   }
 
@@ -20,7 +26,7 @@ export default function NewShop() {
 
   return (
     <div className={styles.container}>
-      <form onSubmit={handleAction} onChange={handleChange}>
+      <form onSubmit={handleSubmit} onChange={handleChange}>
         <label htmlFor="shop-name">
           Shop Name
           <input name="shop-name" />
