@@ -5,6 +5,11 @@
   gap: 1rem;
 
   & > * {
+    width: 16rem;
     padding: 1rem;
+  }
+
+  & > *:last-of-type {
+    margin-top: 1rem;
   }
 }

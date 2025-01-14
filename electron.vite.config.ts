@@ -37,6 +37,7 @@ export default defineConfig({
         '@components': '/src/components',
         '@game': '/src/game',
         '@layers': '/src/layers',
+        '@menus': '/src/menus',
         '@utils': '/src/utils',
         '@enums': '/src/models/enums.ts',
         '@interfaces': '/src/models/interfaces.ts',

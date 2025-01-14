@@ -1,7 +1,8 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { EventBus, StartGame } from '@game/Main'
-import Menu from '@layers/Menu'
+import StartMenu from '@layers/StartMenu'
 import Canvas from '@layers/Canvas'
+import Context from '@utils/context'
 import { GameState } from '@enums'
 import { GameScene } from '@interfaces'
 
@@ -17,8 +18,8 @@ export default function App() {
     window.addEventListener('contextmenu', handleContextMenu)
 
     // When the player clicks outside the game, we want to blur the focus
-    const handleFocus = () => (document.activeElement as HTMLElement)?.blur()
-    window.addEventListener('click', handleFocus)
+    // const handleFocus = () => (document.activeElement as HTMLElement)?.blur()
+    // window.addEventListener('click', handleFocus)
 
     // When the component mounts, start the game. Phaser has it's own state and
     // lifecycle, and we talk between the two using the events system.
@@ -33,7 +34,7 @@ export default function App() {
 
     return () => {
       window.removeEventListener('contextmenu', handleContextMenu)
-      window.removeEventListener('click', handleFocus)
+      // window.removeEventListener('click', handleFocus)
       EventBus.off('scene:ready')
     }
   }, [])
@@ -41,7 +42,9 @@ export default function App() {
   return (
     <>
       <Canvas canvas={canvas} />
-      <Menu scene={scene.current} state={state} />
+      <Context.Provider value={{ state, setState, scene: scene.current }}>
+        <StartMenu />
+      </Context.Provider>
     </>
   )
 }
