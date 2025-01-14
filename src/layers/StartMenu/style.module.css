@@ -5,14 +5,11 @@
   gap: 1rem;
 
   & > * {
+    width: 16rem;
     padding: 1rem;
   }
 
-  h1 {
-    color: white;
-  }
-
-  input {
-    color: black;
+  & > *:last-of-type {
+    margin-top: 1rem;
   }
 }
