@@ -1,11 +1,11 @@
-import { GameState } from '@enums'
-import { Scene } from 'phaser'
 import { createContext } from 'react'
+import { GameState } from '@enums'
+import { GameScene } from '@interfaces'
 
 interface IContext {
+  scene: React.RefObject<GameScene | null>
   state: GameState
-  setState: (state: GameState) => void
-  scene: Scene | null
+  setState: React.Dispatch<React.SetStateAction<GameState>>
 }
 const Context = createContext<IContext | null>(null)
 export default Context
