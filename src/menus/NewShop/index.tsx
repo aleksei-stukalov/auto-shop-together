@@ -1,37 +1,41 @@
-import { useContext } from 'react'
+import { useContext, useRef } from 'react'
 import Context from '@utils/context'
-import styles from './style.module.css'
 import { GameState } from '@enums'
+import styles from './style.module.css'
 
 export default function NewShop() {
   const context = useContext(Context)
-  const state = context?.state
+  const scene = context?.scene.current
   const setState = context?.setState
 
-  const handleChange = (event: React.FormEvent<HTMLFormElement>) => {
-    console.log(event)
-  }
-  const handleAction = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    console.log(event)
-  }
+  const shopName = useRef<HTMLInputElement>(null)
+  const ownerName = useRef<HTMLInputElement>(null)
 
-  if (state !== GameState.START_MENU) return null
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const validCharacters = /^[a-zA-Z0-9\s]{0,20}$/
+    if (!validCharacters.test(event.target.value)) {
+      event.target.value = event.target.value.slice(0, -1)
+    }
+  }
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (shopName.current === null || ownerName.current === null) return
+    scene?.loadShop(shopName.current.value, ownerName.current?.value)
+  }
 
   return (
     <div className={styles.container}>
-      <form onSubmit={handleAction} onChange={handleChange}>
-        <label htmlFor="shop-name">
-          Shop Name
-          <input name="shop-name" />
-        </label>
-        <label htmlFor="owner-name">
-          Owner's Name
-          <input name="owner-name" />
-        </label>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="shop-name">Shop Name</label>
+        <input name="shop-name" ref={shopName} onChange={handleChange} />
+
+        <label htmlFor="owner-name">Owner's Name</label>
+        <input name="owner-name" ref={ownerName} onChange={handleChange} />
+
         <button>Open new shop</button>
       </form>
-      <button onClick={() => setState?.(GameState.MAIN_MENU)}>Back</button>
+      {/* Back Button */}
+      <button onClick={() => setState?.(GameState.MENU_MAIN)}>Back</button>
     </div>
   )
 }

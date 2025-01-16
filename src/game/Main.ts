@@ -1,6 +1,7 @@
-import { Loader } from '@game/scenes/Loader'
-import { Menu } from '@game/scenes/Menu'
-import { Garage } from '@game/scenes/Garage'
+import MenuLoader from '@game/scenes/MenuLoader'
+import MenuScene from '@game/scenes/MenuScene'
+import ShopLoader from '@game/scenes/ShopLoader'
+import ShopScene from '@game/scenes/ShopScene'
 
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
@@ -13,7 +14,7 @@ const config: Phaser.Types.Core.GameConfig = {
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
   backgroundColor: '#484A47',
-  scene: [Loader, Menu, Garage],
+  scene: [MenuLoader, MenuScene, ShopLoader, ShopScene],
 }
 
 export const EventBus = new Phaser.Events.EventEmitter()

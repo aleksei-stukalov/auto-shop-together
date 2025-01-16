@@ -11,14 +11,14 @@ export default function MainMenu() {
   const state = context?.state
   const setState = context?.setState
 
-  const handleNewShop = () => setState?.(GameState.START_MENU)
+  const handleNewShop = () => setState?.(GameState.MENU_START_SHOP)
   const handleLoadShop = () => console.log('Load Game')
   const handleOptions = () => console.log('Options')
   const handleQuit = () => window.close()
 
   return (
     <>
-      <Show when={state === GameState.MAIN_MENU}>
+      <Show when={state === GameState.MENU_MAIN}>
         <div className={styles.container}>
           <button onClick={handleNewShop}>New Shop</button>
           <button onClick={handleLoadShop}>Load Shop</button>
@@ -27,7 +27,9 @@ export default function MainMenu() {
         </div>
       </Show>
 
-      <NewShop />
+      <Show when={state === GameState.MENU_START_SHOP}>
+        <NewShop />
+      </Show>
     </>
   )
 }

@@ -7,7 +7,7 @@ import { GameState } from '@enums'
 import { GameScene } from '@interfaces'
 
 export default function App() {
-  const [state, setState] = useState<GameState>(GameState.LOADING)
+  const [state, setState] = useState<GameState>(GameState.GAME_LOADER)
   const game = useRef<Phaser.Game | null>(null)
   const scene = useRef<GameScene | null>(null)
   const canvas = useRef<HTMLCanvasElement>(null)
@@ -16,10 +16,6 @@ export default function App() {
     // Lets prevent context menu when right clicking in the game
     const handleContextMenu = (e: MouseEvent) => e.preventDefault()
     window.addEventListener('contextmenu', handleContextMenu)
-
-    // When the player clicks outside the game, we want to blur the focus
-    // const handleFocus = () => (document.activeElement as HTMLElement)?.blur()
-    // window.addEventListener('click', handleFocus)
 
     // When the component mounts, start the game. Phaser has it's own state and
     // lifecycle, and we talk between the two using the events system.
@@ -42,7 +38,7 @@ export default function App() {
   return (
     <>
       <Canvas canvas={canvas} />
-      <Context.Provider value={{ state, setState, scene: scene.current }}>
+      <Context.Provider value={{ scene, state, setState }}>
         <StartMenu />
       </Context.Provider>
     </>
