@@ -5,8 +5,9 @@ let window
 app.on('ready', () => {
   window = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 640,
     resizable: false,
+    titleBarStyle: 'hidden',
     // fullscreen: true,
   })
 
