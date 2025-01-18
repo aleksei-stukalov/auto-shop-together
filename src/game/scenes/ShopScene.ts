@@ -4,6 +4,7 @@ export default class ShopScene extends Phaser.Scene {
   state: GameState = GameState.GAME_SCENE
 
   floorTilemap!: Phaser.Tilemaps.Tilemap
+  playerCharacter!: Phaser.GameObjects.Image
 
   constructor() {
     super('ShopScene')
@@ -25,5 +26,11 @@ export default class ShopScene extends Phaser.Scene {
         this.floorTilemap.putTileAt(0, x, y)
       }
     }
+
+    // adding character
+    this.playerCharacter = this.add
+      .sprite(400, 300, 'dev-bob')
+      .setDepth(1)
+      .setFrame(0)
   }
 }
