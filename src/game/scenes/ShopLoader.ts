@@ -37,7 +37,14 @@ export default class ShopLoader extends Phaser.Scene {
   preload() {
     this.load.setPath('assets')
 
-    this.load.image('dev-black', 'tile_floor_dev-black.png')
+    this.load.image('dev-black', 'tile_floor-dev-black.png')
+
+    this.load.spritesheet('dev-bob', 'spriteset_dev-bob.png', {
+      frameWidth: 64,
+      frameHeight: 64,
+    })
+
+
   }
 
   create() {
