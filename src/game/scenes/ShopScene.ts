@@ -33,4 +33,36 @@ export default class ShopScene extends Phaser.Scene {
       .setDepth(1)
       .setFrame(0)
   }
+
+  update(time: number, delta: number): void {
+    if (this.input.keyboard) {
+      const keyboard = this.input.keyboard
+      const onKey = (key: string) => keyboard.addKey(key).isDown
+
+      const movingLeft = onKey('A')
+      const movingRight = onKey('D')
+      const movingUp = onKey('W')
+      const movingDown = onKey('S')
+
+      const touchingLeft = this.playerCharacter.x === 32
+      const touchingRight = this.playerCharacter.x === 768
+      const touchingTop = this.playerCharacter.y === 32
+      const touchingBottom = this.playerCharacter.y === 568
+
+      // Character movement horizontal
+      if (movingLeft && movingRight) this.playerCharacter.setFrame(0)
+      else if (movingLeft && !touchingLeft) this.playerCharacter.x -= 2
+      else if (movingRight && !touchingRight) this.playerCharacter.x += 2
+      // Character movement vertical
+      if (movingUp && movingDown) this.playerCharacter.setFrame(0)
+      else if (movingUp && !touchingTop) this.playerCharacter.y -= 2
+      else if (movingDown && !touchingBottom) this.playerCharacter.y += 2
+      // Character facing
+      if (movingLeft && movingRight) this.playerCharacter.setFrame(0)
+      else if (movingUp) this.playerCharacter.setFrame(2)
+      else if (movingLeft) this.playerCharacter.setFrame(3)
+      else if (movingRight) this.playerCharacter.setFrame(1)
+      else if (movingDown) this.playerCharacter.setFrame(0)
+    }
+  }
 }
