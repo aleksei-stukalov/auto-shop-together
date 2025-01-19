@@ -44,10 +44,10 @@ export default class ShopScene extends Phaser.Scene {
       const movingUp = onKey('W')
       const movingDown = onKey('S')
 
-      const touchingLeft = this.playerCharacter.x === 32
-      const touchingRight = this.playerCharacter.x === 768
-      const touchingTop = this.playerCharacter.y === 32
-      const touchingBottom = this.playerCharacter.y === 568
+      const touchingLeft = this.playerCharacter.x <= 32
+      const touchingRight = this.playerCharacter.x >= 768
+      const touchingTop = this.playerCharacter.y <= 32
+      const touchingBottom = this.playerCharacter.y >= 568
 
       // Character movement horizontal
       if (movingLeft && movingRight) this.playerCharacter.setFrame(0)
